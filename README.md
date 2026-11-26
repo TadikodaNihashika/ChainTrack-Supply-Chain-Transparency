@@ -177,20 +177,14 @@ https://sepolia.etherscan.io/
 - Automated blockchain and database reconciliation
 - Mainnet deployment
 
-## Project Team
+## Project 
+Batch Number:  213
 
-**Batch Number:** 213
+Institution: KL University
 
-**Institution:** KL University
+| T. Nihashika | College ID: 2300033710 |
 
-| Team Member | Student ID |
-|---|---|
-| Sai Ram (Team Leader) | 2300033398 |
-| P. Harshini | 2300032210 |
-| V. Manaswini | 2300032756 |
-| T. Nihashika | 2300033710 |
-
-**Project Guide:** Venkateshwar Rao
+Project Guide: Venkateshwar Rao
 
 ## Conclusion
 
