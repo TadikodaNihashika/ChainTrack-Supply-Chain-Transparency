@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supply Chain Transparency Analytics</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <h2>ChainTrack</h2>
+        <p>Blockchain Supply Chain</p>
+
+        <button onclick="showPage('dashboard')">Dashboard</button>
+        <button onclick="showPage('register')">Register Product</button>
+        <button onclick="showPage('track')">Track Product</button>
+        <button onclick="showPage('update')">Update Status</button>
+        <button onclick="showPage('transactions')">Transaction History</button>
+        <button onclick="showPage('analytics')">Analytics</button>
+        <button onclick="showPage('blockchain')">Blockchain Verification</button>
+
+        <div class="sidebar-footer">
+            Batch 213 | KL University
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <header>
+            <div>
+                <h1>Supply Chain Transparency Analytics</h1>
+                <p>Using Distributed Ledger Technology</p>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:12px;">
+
+                <span class="network" id="blockchainStatus">
+                    Ethereum | Checking...
+                </span>
+
+                <button class="primary"
+                        id="connectWalletBtn"
+                        onclick="connectWallet()">
+                    Connect Wallet
+                </button>
+
+            </div>
+        </header>
+
+
+        <!-- DASHBOARD -->
+
+        <section id="dashboard" class="page">
+
+            <h2>Dashboard Overview</h2>
+
+            <div class="cards">
+
+                <div class="card blue">
+                    <h3>Total Products</h3>
+                    <h1 id="totalProducts">0</h1>
+                </div>
+
+                <div class="card orange">
+                    <h3>In Transit</h3>
+                    <h1 id="inTransit">0</h1>
+                </div>
+
+                <div class="card green">
+                    <h3>Delivered</h3>
+                    <h1 id="delivered">0</h1>
+                </div>
+
+                <div class="card purple">
+                    <h3>Transactions</h3>
+                    <h1 id="totalTransactions">0</h1>
+                </div>
+
+            </div>
+
+            <div class="panel">
+
+                <h2>Welcome to ChainTrack</h2>
+
+                <p>
+                    Register products, monitor supply chain movement,
+                    analyse delivery status and verify records using
+                    Ethereum blockchain integration.
+                </p>
+
+                <p style="margin-top:12px; color:#64748b;">
+                    Powered by Ethereum, Solidity, MetaMask,
+                    Java Spring Boot, Web3j and MySQL.
+                </p>
+
+            </div>
+
+            <div class="panel">
+
+                <h2>Recent Products</h2>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Product ID</th>
+                            <th>Product Name</th>
+                            <th>Manufacturer</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="recentProducts">
+                        <tr>
+                            <td colspan="4">
+                                No products registered yet.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- PRODUCT REGISTRATION -->
+
+        <section id="register" class="page hidden">
+
+            <h2>Register New Product</h2>
+
+            <form id="productForm" class="panel">
+
+                <p style="color:#64748b; margin-bottom:20px;">
+                    Register a product on Ethereum Sepolia.
+                    Confirm the transaction using MetaMask.
+                    After blockchain verification, the product
+                    will be saved in the database.
+                </p>
+
+                <label>Product ID</label>
+                <input id="productId"
+                       required
+                       placeholder="PRD001">
+
+                <label>Product Name</label>
+                <input id="productName" required>
+
+                <label>Manufacturer</label>
+                <input id="manufacturer" required>
+
+                <label>Quantity</label>
+                <input id="quantity"
+                       type="number"
+                       min="1"
+                       step="1"
+                       required>
+
+                <label>Origin</label>
+                <input id="origin" required>
+
+                <label>Destination</label>
+                <input id="destination" required>
+
+                <button type="submit" class="primary">
+                    Register Product on Blockchain
+                </button>
+
+                <p id="registerMessage"
+                   style="margin-top:15px;
+                          overflow-wrap:anywhere;">
+                </p>
+
+            </form>
+
+        </section>
+
+
+        <!-- PRODUCT TRACKING -->
+
+        <section id="track" class="page hidden">
+
+            <h2>Track Product</h2>
+
+            <div class="panel">
+
+                <label>Enter Product ID</label>
+
+                <input id="trackProductId"
+                       placeholder="PRD001">
+
+                <button class="primary"
+                        onclick="trackProduct()">
+                    Track Product
+                </button>
+
+                <div id="trackingResult"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- UPDATE PRODUCT STATUS -->
+
+        <section id="update" class="page hidden">
+
+            <h2>Update Product Status</h2>
+
+            <form id="updateForm" class="panel">
+
+                <p style="color:#64748b; margin-bottom:20px;">
+                    Update product movement and location.
+                    Each successful blockchain status update
+                    generates an Ethereum transaction hash.
+                </p>
+
+                <label>Product ID</label>
+                <input id="updateId" required>
+
+                <label>Current Location</label>
+                <input id="location" required>
+
+                <label>Product Status</label>
+
+                <select id="status">
+                    <option>Registered</option>
+                    <option>In Transit</option>
+                    <option>At Warehouse</option>
+                    <option>Delivered</option>
+                </select>
+
+                <button type="submit" class="primary">
+                    Update Status on Blockchain
+                </button>
+
+                <p id="updateMessage"
+                   style="margin-top:15px;
+                          overflow-wrap:anywhere;">
+                </p>
+
+            </form>
+
+        </section>
+
+
+        <!-- TRANSACTION HISTORY -->
+
+        <section id="transactions" class="page hidden">
+
+            <h2>Transaction History</h2>
+
+            <div class="panel">
+
+                <p style="color:#64748b; margin-bottom:20px;">
+                    View product registration and status update
+                    records along with their Ethereum transaction
+                    hashes, where available.
+                </p>
+
+                <div style="overflow-x:auto;">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>Product ID</th>
+                                <th>Action</th>
+                                <th>Date and Time</th>
+                                <th>Blockchain Hash</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="transactionTable">
+                            <tr>
+                                <td colspan="4">
+                                    No transactions yet.
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <p style="font-size:13px;
+                          color:#64748b;
+                          margin-top:15px;">
+
+                    Records displaying "Not recorded" do not
+                    have an associated blockchain transaction hash.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- SUPPLY CHAIN ANALYTICS -->
+
+        <section id="analytics" class="page hidden">
+
+            <h2>Supply Chain Analytics</h2>
+
+            <div class="panel">
+
+                <h3>Product Status Distribution</h3>
+
+                <div id="analyticsResult">
+                    No product data available.
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- BLOCKCHAIN VERIFICATION -->
+
+        <section id="blockchain" class="page hidden">
+
+            <h2>Blockchain Verification</h2>
+
+            <div class="panel">
+
+                <h3>Ethereum Integration</h3>
+
+                <p>
+                    <strong>Network:</strong>
+                    Ethereum Sepolia Testnet
+                </p>
+
+                <p>
+                    <strong>Chain ID:</strong>
+                    11155111
+                </p>
+
+                <p>
+                    <strong>Smart Contract:</strong>
+                    SupplyChain.sol
+                </p>
+
+                <p>
+                    <strong>Consensus Mechanism:</strong>
+                    Proof of Stake
+                </p>
+
+                <p>
+                    <strong>Wallet:</strong>
+                    MetaMask
+                </p>
+
+                <p>
+                    <strong>Blockchain Library:</strong>
+                    Web3j and Ethers.js
+                </p>
+
+                <p style="overflow-wrap:anywhere;">
+
+                    <strong>Contract Address:</strong>
+                    0xb8D9da6bb643DC05329908B46bB5caFd9363e3aC
+
+                </p>
+
+                <p>
+
+                    <strong>Blockchain Explorer:</strong>
+
+                    <a href="https://sepolia.etherscan.io/address/0xb8D9da6bb643DC05329908B46bB5caFd9363e3aC"
+                       target="_blank"
+                       rel="noopener noreferrer">
+
+                        View Smart Contract on Etherscan
+
+                    </a>
+
+                </p>
+
+                <hr style="margin:20px 0;
+                           border:1px solid #e2e8f0;">
+
+                <h3>Verify Blockchain Transaction</h3>
+
+                <p style="color:#64748b; margin:15px 0;">
+
+                    Copy a transaction hash from Transaction History
+                    and enter it below to verify the transaction
+                    directly through Ethereum Sepolia.
+
+                </p>
+
+                <label>Transaction Hash</label>
+
+                <input id="transactionHash"
+                       placeholder="Enter Ethereum transaction hash (0x...)"
+                       maxlength="66"
+                       autocomplete="off"
+                       spellcheck="false">
+
+                <button class="primary"
+                        onclick="verifyTransaction()">
+
+                    Verify Transaction
+
+                </button>
+
+                <p style="font-size:13px;
+                          color:#64748b;
+                          margin-top:12px;">
+
+                    Verification checks whether the transaction
+                    succeeded on Ethereum Sepolia and was sent
+                    to the configured smart contract.
+
+                </p>
+
+                <p id="verificationResult"
+                   style="margin-top:20px;
+                          white-space:pre-line;
+                          overflow-wrap:anywhere;
+                          line-height:1.8;">
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.5/dist/ethers.umd.min.js"></script>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

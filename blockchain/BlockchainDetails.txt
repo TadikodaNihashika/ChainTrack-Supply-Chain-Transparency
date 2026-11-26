@@ -1,0 +1,16 @@
+Project: ChainTrack
+Network: Ethereum Sepolia
+Chain ID: 11155111
+Smart Contract: SupplyChain.sol
+
+Contract Address:
+0xb8D9da6bb643DC05329908B46bB5caFd9363e3aC
+
+Wallet Address:
+0x7940d3Ae68b140ae906F248b879bF5150edb8B74
+
+RPC URL:
+https://ethereum-sepolia-rpc.publicnode.com
+
+Application URL:
+http://localhost:8081
